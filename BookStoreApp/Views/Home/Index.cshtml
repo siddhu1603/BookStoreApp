@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Welcome to BookStore";
+}
+
+<div class="container" style="border-radius:16px;">
+    <div class="jumbotron text-center bg-dark text-white p-3 shadow-lg" style="border-radius:16px;">
+        <h1 class="display-4">Welcome to BookStore</h1>
+        <p class="lead">Your one-stop destination for the best books, genres, and authors.</p>
+        <hr class="my-4">
+        <p>Browse our extensive collection and find your next great read today!</p>   
+        @if (Context.User.Identity.IsAuthenticated)
+        {
+            <a class="btn btn-primary btn-lg pb-3 align-content-center" href="@Url.Action("GetAll", "Book")
+            " role="button">Browse Books</a>
+        }
+    </div>
+    <div align="center" style="padding-top: 13pt;">
+        @if (!Context.User.Identity.IsAuthenticated)
+        {
+            <a asp-action="Login" asp-controller="Login" class="btn btn-success btn-lg">Google Login</a>
+        }
+    </div>
+</div>
+

@@ -1,0 +1,41 @@
+﻿@model BookStoreApp.Models.Domain.Author
+@{
+   
+}
+
+<div align="center" style="width:100%;">
+    <div style="background-color: lightsteelblue; padding: 20px 40px; border-radius: 20px; width:fit-content; min-width: 60%;">
+        <form asp-action="Add" method="post">
+            <div>
+                <div>
+                    <h3>Add Author</h3>
+
+                    @* This action method mentioned here will be called when the form is submitted *@
+
+                    <div class="form-group col-md-6">
+                        <label asp-for="AuthorName">Name *</label>
+                        <input type="text" class="form-control" asp-for="AuthorName" />
+
+                        @* Here also we have a asp-for tag and since we are passing the model to this view from the Update method
+                        The MVCs model Binding system fills the textbox with the "Name" parameter of the model. *@
+
+                        <span asp-validation-for="AuthorName" class="text-danger"></span>
+                    </div>
+
+                    @if (TempData["msg"] != null)
+                    {
+                        <div class="form-group">
+                            @TempData["msg"]
+                        </div>
+                    }
+                </div>
+            </div>
+            <div>
+                <div style="padding-top: 20px;">
+                    <button type="submit" class="btn btn-success"><i class="bi bi-save"></i> Save</button>
+                    <a href="/Author/GetAll" class="btn btn-primary"><i class="bi-list"></i> List</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

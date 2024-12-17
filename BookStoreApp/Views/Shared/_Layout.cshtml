@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-signin-client_id" content="93232668655-oldjpt0ht95l5etl2cmglohetgbjiut4.apps.googleusercontent.com">
+    <title>Book Store</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/site.css" />
+    <script src="../js/site.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+    
+
+    <style>
+        body {
+            background-image: url('../bg.png');
+            /*background-size: ;*/
+            background-repeat: repeat-y;
+            background-attachment: fixed;
+            background-position: right bottom;
+            color: #fff;
+            background-color:azure;
+        }
+
+        .container {
+            background-color: lightsteelblue;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        a {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        /*.navbar {
+            margin-bottom: 20px;
+        }*/
+
+        .navbar-nav{
+            flex-direction: row !important;
+        }
+
+        .navbar-nav .nav-link {
+            padding-left: 10px;
+            padding-right: 10px;
+            }
+        h3{
+            padding-bottom: 10px;
+            color: midnightblue;
+            
+        }
+        label{
+            display: flex;
+            color: black;
+        }
+
+        .form-group{
+            color:darkblue;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+</head>
+<body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script>
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                console.log('User signed out.');
+            });
+        }
+
+        function onLoad() {
+            gapi.load('auth2', function () {
+                gapi.auth2.init();
+            });
+        }
+    </script>
+
+    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3">
+        <a class="navbar-brand" href="/Home/Index">BookStore</a>
+        <ul class="navbar-nav mr-auto">
+            @if (Context.User.Identity.IsAuthenticated)
+            {
+                <li class="nav-item">
+                    <a href="/Genre/GetAll" class="nav-link">Genres</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/Author/GetAll" class="nav-link">Authors</a>
+                </li>
+                <li class="nav-item active">
+                    <a href="/Publisher/GetAll" class="nav-link">Publishers</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/Book/GetAll" class="nav-link">Books</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/Book/Query" class="nav-link">Query</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/Home/About" style="white-space:nowrap;" class="nav-link">About Me</a>
+                </li>
+            }
+        </ul>  
+        @if (Context.User.Identity.IsAuthenticated)
+        {
+            @* <a href="/Login/Logout" class="btn btn-danger" style="white-space: nowrap;">Sign out</a> *@
+            <a href="#" class="btn btn-danger" style="white-space: nowrap;" onclick="signOut();">Sign out</a>
+
+           @*  <form asp-action="Logout" asp-controller="Login" method="get" name="frmlogout">
+                <div>
+                    <button type="button" style="white-space: nowrap;" onclick="signOut();" class="btn btn-danger">Sign Out</button>
+                </div>
+            </form> *@
+
+            @* <div>
+                <button type="button" style="white-space: nowrap;" onclick="signOut();" class="btn btn-danger">Sign Out</button>
+            </div> *@
+
+            <div style="width:100%;">
+                <div align="right" style="white-space: nowrap;">Welcome, @User.Identity.Name</div>
+            </div>
+        }
+    </nav>
+    <div style="height: 6px; width: 100%; background-color: lightskyblue; margin-bottom: 20px;"></div>
+    <div class="container1">
+        @RenderBody()
+    </div>
+</body>
+</html>

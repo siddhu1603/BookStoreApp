@@ -1,0 +1,39 @@
+﻿@model QueryViewModel //The model that was passed from BookController ka GET variant of Query method.
+@{
+    ViewBag.Title = "Book Query";
+}
+
+<div align="center" style="width:100%;">
+    <div style="background-color: lightsteelblue; padding: 20px 40px; border-radius: 20px; width:fit-content; min-width: 60%;">
+        <form asp-action="Query" method="post" name="frmquery">
+            <div>
+                <div>
+                    <h3>SEARCH BOOKS</h3>
+                    @* when frm submitted with the choices stored in model the POST variant of Query is called. *@
+                    <div class="form-group">
+                        <label>Genre</label>
+                        <select asp-for="GenreId" asp-items="Model.GenreList" class="form-select">
+                            <option value="X"> -- Select Genre --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Author</label>
+                        <select asp-for="AuthorId" asp-items="Model.AuthorList" class="form-select">
+                            <option value="X"> -- Select Author --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Publisher</label>
+                        <select asp-for="PublisherId" asp-items="Model.PublisherList" class="form-select">
+                            <option value="X"> -- Select Publisher --</option>
+                        </select>
+                    </div>
+                    <div class="form-group pt-3">
+                        <button type="button" onclick="checkQuery();" class="btn btn-primary">Search</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

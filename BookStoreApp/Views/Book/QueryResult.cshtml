@@ -1,0 +1,38 @@
+﻿@model QueryViewModel             //This model now contains the list of retrieved books.
+@{
+    ViewBag.Title = "Query Result";
+}
+
+<div class="container pt-5">
+    <h3>Book Results</h3>
+    @if (Model.Books.Any())
+    {
+        <table class="table table-bordered table-striped table-dark">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Genre</th>
+                    <th>Author</th>
+                    <th>Publisher</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var book in Model.Books)
+                {
+                    <tr>
+                        <td>@book.Title</td>
+                        <td>@book.GenreName</td>
+                        <td>@book.AuthorName</td>
+                        <td>@book.PublisherName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p style="color:darkblue;">No books match the selected criteria.</p>
+    }
+
+    <a href="@Url.Action("Query")" class="btn btn-success">Make Another Query</a> @* Once the list has been displayed this button will reroute to Query.cshtml *@ 
+</div>

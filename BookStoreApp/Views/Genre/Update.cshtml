@@ -1,0 +1,76 @@
+﻿@model BookStoreApp.Models.Domain.Genre
+@{
+   
+}
+<div align="center" style="width:100%;">
+    <div style="background-color: lightsteelblue; padding: 20px 40px; border-radius: 20px; width:fit-content; min-width: 60%;">
+        <form asp-action="Update" method="post">
+        <div>
+            <div>
+                <h3>Update Genre</h3>
+
+                    @* This action method mentioned here will be called when the form is submitted *@
+
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group col-md-6">
+                        <label asp-for="Name">Name *</label>
+                        <input type="text" class="form-control" asp-for="Name" />
+
+                        @* Here also we have a asp-for tag and since we are passing the model to this view from the Update method
+                        The MVCs model Binding system fills the textbox with the "Name" parameter of the model. *@
+
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    @if (TempData["msg"] != null)
+                    {
+                        <div class="form-group">
+                            @TempData["msg"]
+                        </div>
+                    }
+            </div>
+        </div>
+        <div>
+                <div style="padding-top: 20px;">
+                <button type="submit" class="btn btn-success"><i class="bi bi-save"></i> Save</button>
+                <a href="/Genre/GetAll" class="btn btn-primary"><i class="bi-list"></i> List</a>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+@* --------------------------------------
+<div class="container pt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Update Genre</h3>
+            <form asp-action="Update" method="post"> 
+                
+                @* This action method mentioned here will be called when the form is submitted *@
+
+                @* <input type="hidden" asp-for="Id"/>
+                <div class="form-group">
+                    <label asp-for="Name">Name *</label>
+                    <input type="text" class="form-control" asp-for="Name"/> *@
+
+        @* Here also we have a asp-for tag and since we are passing the model to this view from the Update method
+        The MVCs model Binding system fills the textbox with the "Name" parameter of the model. *@
+
+                    @* <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                @if (TempData["msg"] != null)
+                {
+                    <div class="form-group">
+                        @TempData["msg"]
+                    </div>
+                }
+                <div class="form-group pt-3">
+                    <button type="submit" class="btn btn-dark"><i class="bi bi-save"></i> Save</button>
+                    <a href="/Genre/GetAll" class="btn btn-primary"><i class="bi-list"></i> List</a>
+                </div>               
+            </form>
+        </div>
+    </div>
+</div> *@ 
+

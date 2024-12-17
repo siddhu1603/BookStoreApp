@@ -1,0 +1,26 @@
+networks:
+  bookstoreappnetwork:
+
+services:
+  bookstoreappdb:
+    container_name: bookstoreappdb
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+     - 1433:1433
+    environment:
+     - ACCEPT_EULA=Y
+     - MSSQL_SA_PASSWORD=Siddhu@02
+    networks:
+     - bookstoreappnetwork
+  bookstoreapp:
+    container_name: bookstoreapp
+    ports:
+     - 5000:5000
+    image: ${DOCKER_REGISTRY-}bookstoreapp
+    build:
+      context: .
+      dockerfile: BookStoreApp/Dockerfile
+    depends_on: 
+     - bookstoreappdb
+    networks:
+     - bookstoreappnetwork

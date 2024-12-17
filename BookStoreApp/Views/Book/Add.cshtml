@@ -1,0 +1,86 @@
+﻿@model BookStoreApp.Models.Domain.Book
+@{
+
+}
+
+<div align="center" style="width:100%;">
+    <div style="background-color: lightsteelblue; padding: 20px 40px; border-radius: 20px; width:fit-content; min-width: 60%;">
+        <form asp-action="Add" method="post">
+            @* This action method mentioned here will be called when the form is submitted *@
+            <div>
+                <div>
+                    <h3>Add Book</h3>
+                  
+                    <div style="background-color:lightslategray;border-radius: 20px; padding: 10px;">
+                        <input type="hidden" asp-for="Id" />
+                        <div class="form-group col-md-6">
+                            <label asp-for="Title">Title *</label>
+                            <input type="text" class="form-control" asp-for="Title" />
+
+                            @* Here also we have a asp-for tag and since we are passing the model to this view from the Update method
+                            The MVCs model Binding system fills the textbox with the "Name" parameter of the model. *@
+
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="ISBN">ISBN *</label>
+                            <input type="text" class="form-control" asp-for="ISBN" />
+                            <span asp-validation-for="ISBN" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group  col-md-6">
+                            <label asp-for="TotalPages">Total Pages *</label>
+                            <input type="number" class="form-control" asp-for="TotalPages" min="1" />
+                            <span asp-validation-for="TotalPages" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label asp-for="GenreId">Genre *</label>
+                            <div style="display:flex;">
+                                <select asp-for="GenreId" asp-items="Model.GenreList" class="form-select">
+                                    <option value=""> -- Select --</option>
+                                </select>
+                                &nbsp;&nbsp; <a href="/Genre/Add" class="btn btn-primary" title="Add New Genre"> + </a>
+                            </div>
+                            <span asp-validation-for="GenreId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label asp-for="AuthorId">Author *</label>
+                            <div style="display:flex;">
+                                <select asp-for="AuthorId" asp-items="Model.AuthorList" class="form-select">
+                                    <option value=""> -- Select --</option>
+                                </select>
+                                &nbsp;&nbsp; <a href="/Author/Add" class="btn btn-primary" title="Add New Author"> + </a>
+                            </div>
+                            <span asp-validation-for="AuthorId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label asp-for="PublisherId">Publisher *</label>
+                            <div style="display:flex;">
+                                <select asp-for="PublisherId" asp-items="Model.PublisherList" class="form-select">
+                                    <option value=""> -- Select --</option>
+                                </select>
+                                &nbsp;&nbsp; <a href="/Author/Add" class="btn btn-primary" title="Add New Publisher"> + </a>
+                            </div>
+                            <span asp-validation-for="PublisherId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    @if (TempData["msg"] != null)
+                    {
+                        <div class="form-group">
+                            @TempData["msg"]
+                        </div>
+                    }
+                </div>
+            </div>
+            <div>
+                <div style="padding-top: 20px;">
+                    <button type="submit" class="btn btn-success"><i class="bi bi-save"></i> Save</button>
+                    <a href="/Book/GetAll" class="btn btn-primary"><i class="bi-list"></i> List</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
